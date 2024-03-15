@@ -9,14 +9,15 @@ const activeStyle = ({ isActive }) => ({
 const BaseLayout = () => {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 홈
               </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink
                 style={activeStyle}
@@ -34,4 +35,5 @@ const BaseLayout = () => {
     </div>
   );
 };
+
 export default BaseLayout;

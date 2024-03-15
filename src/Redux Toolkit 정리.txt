@@ -1,0 +1,58 @@
+https://redux-toolkit.js.org/
+https://ko.redux.js.org/redux-toolkit/overview/
+
+1. 라이브러리 설치
+npm install @reduxjs/toolkit react-redux
+
+2. redux
+ Redux는 JavaScript 애플리케이션의 상태 관리를 효율적으로 해주는 라이브러리이다.
+ Redux는 단방향 데이터 흐름을 따르며, 상태를 예측 가능하고 일관성 있게 유지할 수 있다. 
+ Redux를 사용하면 복잡한 상태 관리를 간소화하고, 컴포넌트 간의 데이터 공유를 용이하게 할 수 있다.
+ 
+3. Redux Toolkit에 포함된 기능들
+①configureStore(): createStore를 감싸서 쓸만한 기본값들과 단순화된 설정을 제공합니다. 여러분의 리듀서 조각들을 자동으로 합쳐주고, 기본 제공되는 redux-thunk를 포함해서 여러분이 지정한 미들웨어들을 더해주고, Redux DevTools 확장을 사용할 수 있게 합니다.
+②createReducer(): switch 문을 작성하는 대신, 액션 타입과 리듀서 함수를 연결해주는 목록을 작성하도록 합니다. 여기에 더해 immer 라이브러리를 자동으로 사용해서, state.todos[3].completed = true와 같은 변이 코드를 통해 간편하게 불변 업데이트를 할 수 있도록 합니다.
+③createAction(): 주어진 액션 타입 문자열을 이용해 액션 생산자 함수를 만들어줍니다. 함수 자체에 toString() 정의가 포함되어 있어서, 타입 상수가 필요한 곳에 사용할 수 있습니다.
+④createSlice(): 조각 이름과 상태 초기값, 리듀서 함수들로 이루어진 객체를 받아 그에 맞는 액션 생산자와 액션 타입을 포함하는 리듀서 조각을 자동으로 만들어줍니다.
+⑤createAsyncThunk: 액션 타입 문자열과 프로미스를 반환하는 함수를 받아, pending/fulfilled/rejected 액션 타입을 디스패치해주는 thunk를 생성해줍니다.
+⑥createEntityAdapter: 저장소 내에 정규화된 데이터를 다루기 위한 리듀서와 셀렉터를 만들어줍니다.
+⑦createSelector 유틸리티를 Reselect 라이브러리에서 다시 익스포트해서 쓰기 쉽게 해줍니다.
+
+4. numberSlice.js
+  export const numberSlice = createSlice({
+    name: 'number',
+    initialState,
+    reducers: {
+      onHandleIncrease: (state, action) => {
+        state.value += action.payload;
+      },
+      onHandleDecrease: (state, action) => {
+        state.value -= action.payload;
+      },
+    },
+  });
+
+5. store.js  
+   state 저장, Redux 어플리케이션에서 한개의 store만 사용한다.
+   import { configureStore } from '@reduxjs/toolkit'
+
+   export const store = configureStore({
+	  reducer: {},
+   })
+
+
+ <Provider store={store}>
+    <MyReduxToolkit01 />
+ </Provider>
+
+6. store의 값 사용
+ const number = useSelector((state) => state.number.value);
+
+7. reducer 실행
+const dispatch = useDispatch()
+
+8. Redux Toolkit은 Redux의 세 가지를 해결한 버전
+①저장소를 설정하는 것이 너무 복잡하다
+②쓸만하게 되려면 너무 많은 패키지들을 더 설치해야 한다
+③보일러플레이트 코드를 너무 많이 필요로 한다
+
